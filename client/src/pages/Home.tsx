@@ -177,7 +177,8 @@ export default function Home() {
             <img
               src="/images/profile.jpeg"
               alt="Profile"
-              className="w-full h-auto object-cover rounded-t-[3rem] shadow-2xl shadow-primary/20 relative z-20 mask-image-gradient"
+              className="w-full h-auto object-cover rounded-t-[3rem] shadow-2xl shadow-primary/20 relative z-20"
+              style={{ maskImage: 'linear-gradient(to bottom, transparent, black)' }}
             />
           </motion.div>
         </div>
