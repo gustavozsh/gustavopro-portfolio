@@ -6,10 +6,12 @@ import { Streamdown } from 'streamdown';
 
 export default function Home() {
   const { posts: aboutPosts } = usePosts('about');
+  const { posts: skillsPosts } = usePosts('skills');
   const { posts: projectPosts } = usePosts('projects');
   const { posts: eventPosts } = usePosts('events');
   
   const aboutContent = aboutPosts[0];
+  const skillsContent = skillsPosts[0];
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
@@ -87,34 +89,20 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative" id="skills">
               <div className="absolute -inset-4 border-2 border-black dark:border-white translate-x-4 translate-y-4 z-0"></div>
               <div className="relative z-10 bg-white dark:bg-black border-2 border-black dark:border-white p-8 shadow-xl">
                 <h3 className="text-2xl font-display mb-6 border-b-2 border-accent pb-2 inline-block">SKILLS</h3>
                 
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-sm font-bold uppercase mb-2 text-muted-foreground">Main Stack</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['Python', 'SQL', 'Spark', 'AWS', 'GCP', 'Azure'].map(skill => (
-                        <span key={skill} className="px-3 py-1 bg-black text-white dark:bg-white dark:text-black font-mono text-sm font-bold">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                {skillsContent ? (
+                  <div className="prose prose-sm dark:prose-invert max-w-none skills-content">
+                    <Streamdown>{skillsContent.content}</Streamdown>
                   </div>
-                  
-                  <div>
-                    <h4 className="text-sm font-bold uppercase mb-2 text-muted-foreground">Tools & Others</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['Docker', 'Kubernetes', 'Terraform', 'Airflow', 'dbt', 'MLOps'].map(skill => (
-                        <span key={skill} className="px-3 py-1 border border-black dark:border-white font-mono text-sm font-bold hover:bg-accent hover:border-accent transition-colors">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                ) : (
+                  <div className="space-y-6">
+                    <p className="text-muted-foreground">Carregando habilidades...</p>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

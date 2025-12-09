@@ -138,4 +138,21 @@
     content: '';
     @apply absolute -bottom-2 left-0 w-full h-2 bg-accent;
   }
+  
+  /* Skills Section Styling */
+  .skills-content h2 {
+    @apply text-sm font-bold uppercase mb-3 text-muted-foreground border-none mt-6 first:mt-0;
+  }
+  
+  .skills-content ul {
+    @apply flex flex-wrap gap-2 list-none p-0 m-0;
+  }
+  
+  .skills-content li {
+    @apply px-3 py-1 bg-black text-white dark:bg-white dark:text-black font-mono text-sm font-bold m-0;
+  }
+  
+  .skills-content li:hover {
+    @apply bg-accent text-black;
+  }
 }
