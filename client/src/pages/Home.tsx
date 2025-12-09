@@ -144,7 +144,25 @@ export default function Home() {
 
         {/* Right Side - Image & Modern Background */}
         <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen flex items-end justify-center overflow-hidden bg-secondary/30">
-          <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black)' }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, rgba(30,41,59,0.04) 0px, rgba(30,41,59,0.04) 1px, transparent 1px, transparent 32px), repeating-linear-gradient(90deg, rgba(30,41,59,0.04) 0px, rgba(30,41,59,0.04) 1px, transparent 1px, transparent 32px)",
+              maskImage: "linear-gradient(to bottom, transparent, black)",
+            }}
+            // Dark mode override
+            data-dark="true"
+          />
+          <style>
+            {`
+              [data-dark="true"]:is(.dark) {
+                background-image:
+                  repeating-linear-gradient(0deg, rgba(148,163,184,0.05) 0px, rgba(148,163,184,0.05) 1px, transparent 1px, transparent 32px),
+                  repeating-linear-gradient(90deg, rgba(148,163,184,0.05) 0px, rgba(148,163,184,0.05) 1px, transparent 1px, transparent 32px);
+              }
+            `}
+          </style>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
