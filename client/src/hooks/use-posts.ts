@@ -34,7 +34,9 @@ export function usePosts(section?: string) {
           'about.md',
           'skills.md',
           'project-1.md',
-          'event-1.md'
+          'event-1.md',
+          'event-2.md',
+          'event-3.md'
         ];
 
         const loadedPosts = await Promise.all(
