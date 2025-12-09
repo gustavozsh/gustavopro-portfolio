@@ -36,54 +36,54 @@
 }
 
 :root {
-  /* Neo-Brutalism Palette */
-  --background: #FFFFFF;
-  --foreground: #000000;
+  /* Premium Modern Palette - Blue Theme */
+  --background: #ffffff;
+  --foreground: #0f172a; /* Slate 900 */
   
-  --primary: #000000;
-  --primary-foreground: #FFFFFF;
+  --primary: #2563eb; /* Royal Blue */
+  --primary-foreground: #ffffff;
   
-  --secondary: #F5F5F5;
-  --secondary-foreground: #000000;
+  --secondary: #f1f5f9; /* Slate 100 */
+  --secondary-foreground: #0f172a;
   
-  --muted: #E5E5E5;
-  --muted-foreground: #737373;
+  --muted: #f8fafc; /* Slate 50 */
+  --muted-foreground: #64748b; /* Slate 500 */
   
-  --accent: #00F0B5; /* Mint Green Accent */
-  --accent-foreground: #000000;
+  --accent: #3b82f6; /* Blue 500 */
+  --accent-foreground: #ffffff;
   
-  --card: #FFFFFF;
-  --card-foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
   
-  --border: #000000;
-  --input: #000000;
-  --ring: #00F0B5;
+  --border: #e2e8f0; /* Slate 200 */
+  --input: #e2e8f0;
+  --ring: #2563eb;
   
-  --radius: 0px; /* Sharp edges for brutalism */
+  --radius: 0.75rem; /* Rounded corners for modern feel */
 }
 
 .dark {
-  --background: #0A0A0A;
-  --foreground: #FFFFFF;
+  --background: #020617; /* Slate 950 */
+  --foreground: #f8fafc; /* Slate 50 */
   
-  --primary: #FFFFFF;
-  --primary-foreground: #000000;
+  --primary: #3b82f6; /* Blue 500 */
+  --primary-foreground: #ffffff;
   
-  --secondary: #1A1A1A;
-  --secondary-foreground: #FFFFFF;
+  --secondary: #1e293b; /* Slate 800 */
+  --secondary-foreground: #f8fafc;
   
-  --muted: #262626;
-  --muted-foreground: #A3A3A3;
+  --muted: #0f172a; /* Slate 900 */
+  --muted-foreground: #94a3b8; /* Slate 400 */
   
-  --accent: #00F0B5;
-  --accent-foreground: #000000;
+  --accent: #2563eb; /* Blue 600 */
+  --accent-foreground: #ffffff;
   
-  --card: #0A0A0A;
-  --card-foreground: #FFFFFF;
+  --card: #0f172a; /* Slate 900 */
+  --card-foreground: #f8fafc;
   
-  --border: #FFFFFF;
-  --input: #FFFFFF;
-  --ring: #00F0B5;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #3b82f6;
 }
 
 @layer base {
@@ -91,7 +91,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased selection:bg-accent/20 selection:text-accent;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold uppercase tracking-tight;
@@ -122,21 +122,21 @@
     }
   }
   
-  .btn-brutal {
-    @apply inline-flex items-center justify-center px-6 py-3 font-display font-bold uppercase tracking-wider border-2 border-black bg-white text-black transition-all hover:bg-black hover:text-white hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  /* Modern Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-sans font-medium transition-all duration-300 bg-primary text-primary-foreground hover:brightness-110 active:scale-95 shadow-lg shadow-primary/25 hover:shadow-primary/40;
   }
-  
-  .dark .btn-brutal {
-    @apply border-white bg-black text-white hover:bg-white hover:text-black hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)];
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-sans font-medium transition-all duration-300 border border-input bg-background hover:bg-accent hover:text-accent-foreground active:scale-95;
   }
   
   .section-title {
-    @apply text-4xl md:text-6xl mb-12 relative inline-block;
+    @apply text-4xl md:text-6xl mb-12 relative inline-block font-display font-bold bg-gradient-to-r from-foreground to-foreground/50 bg-clip-text text-transparent;
   }
   
-  .section-title::after {
-    content: '';
-    @apply absolute -bottom-2 left-0 w-full h-2 bg-accent;
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
   }
   
   /* Skills Section Styling */
@@ -149,10 +149,6 @@
   }
   
   .skills-content li {
-    @apply px-3 py-1 bg-black text-white dark:bg-white dark:text-black font-mono text-sm font-bold m-0;
-  }
-  
-  .skills-content li:hover {
-    @apply bg-accent text-black;
+    @apply px-4 py-1.5 rounded-full bg-secondary text-secondary-foreground font-sans text-sm font-medium m-0 transition-colors hover:bg-accent hover:text-accent-foreground cursor-default;
   }
 }
