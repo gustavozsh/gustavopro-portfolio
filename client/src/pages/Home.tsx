@@ -11,6 +11,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
+// ============================================================================
+// CONTACT FORM - PLACEHOLDER IMPLEMENTATION
+// ============================================================================
+// NOTE: The contact form below validates user input but does NOT actually 
+// send messages anywhere. Form submissions are logged to console only.
+// This is a placeholder implementation pending backend integration.
+// ============================================================================
+
 // Validation Schema for Contact Form
 const contactSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }).max(50),
@@ -34,10 +42,16 @@ export default function Home() {
     resolver: zodResolver(contactSchema),
   });
 
+  // PLACEHOLDER: This form submission is not yet connected to a backend API
+  // TODO: Implement actual email/contact submission when backend is ready
   const onSubmit = async (data: ContactFormValues) => {
-    // Simulate API call
+    // Simulate API call - this is a placeholder implementation
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Form Data:", data);
+    
+    // For now, just log to console (not sent anywhere)
+    console.log("Form Data (not sent - placeholder implementation):", data);
+    
+    // Show success message (note: data is not actually sent)
     toast.success(t.messageSent || "Message sent successfully!");
     reset();
   };
