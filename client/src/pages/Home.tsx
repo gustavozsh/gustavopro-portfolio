@@ -41,7 +41,7 @@ export default function Home() {
       reset();
     },
     onError: (error) => {
-      toast.error('Failed to send message. Please try again.');
+      toast.error(t.messageFailed);
       console.error('Contact form error:', error);
     },
   });

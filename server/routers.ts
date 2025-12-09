@@ -28,16 +28,16 @@ export const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        // Log the contact form submission
+        // Log the contact form submission for development/debugging
+        // TODO: In production, use proper logging service and avoid logging sensitive data
         console.log('Contact form submission:', {
           name: input.name,
           email: input.email,
-          message: input.message,
+          message: input.message.substring(0, 50) + '...', // Only log first 50 chars
           timestamp: new Date().toISOString(),
         });
         
         // TODO: Implement email sending or database storage
-        // For now, we just log the submission
         // You can integrate with services like SendGrid, AWS SES, or save to database
         
         return {
