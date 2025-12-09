@@ -29,21 +29,20 @@ export const appRouter = router({
       )
       .mutation(async ({ input }) => {
         // Log the contact form submission for development/debugging
-        // TODO: In production, use proper logging service and avoid logging sensitive data
-        console.log('Contact form submission received:', {
-          timestamp: new Date().toISOString(),
-          hasName: !!input.name,
-          hasEmail: !!input.email,
-          messageLength: input.message.length,
-        });
+        // TODO: Replace with proper logging library (e.g., Winston, Pino) for production
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Contact form submission received:', {
+            timestamp: new Date().toISOString(),
+            hasName: !!input.name,
+            hasEmail: !!input.email,
+            messageLength: input.message.length,
+          });
+        }
         
         // TODO: Implement email sending or database storage
         // You can integrate with services like SendGrid, AWS SES, or save to database
         
-        return {
-          success: true,
-          message: 'Contact form received successfully',
-        };
+        return { success: true };
       }),
   }),
 

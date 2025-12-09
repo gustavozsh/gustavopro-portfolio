@@ -42,7 +42,10 @@ export default function Home() {
     },
     onError: (error) => {
       toast.error(t.messageFailed);
-      console.error('Contact form error:', error);
+      // Only log error message, not full error object
+      if (error?.message) {
+        console.error('Contact form error:', error.message);
+      }
     },
   });
 
