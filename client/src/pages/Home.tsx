@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePosts } from '@/hooks/use-posts';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaUsers, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaImages } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaUsers, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaImages, FaCode } from 'react-icons/fa';
 import { SiGooglechrome } from 'react-icons/si';
 import { Streamdown } from 'streamdown';
 import { motion } from 'framer-motion';
