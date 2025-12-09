@@ -32,6 +32,7 @@ export function usePosts(section?: string) {
         
         const files = [
           'about.md',
+          'skills.md',
           'project-1.md',
           'event-1.md'
         ];
