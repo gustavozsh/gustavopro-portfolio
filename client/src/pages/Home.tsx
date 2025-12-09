@@ -231,7 +231,7 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500"></div>
 
               <h3 className="text-2xl font-display font-bold mb-8 text-foreground flex items-center gap-3">
-                <span className="p-2 bg-primary/10 rounded-lg text-primary"><FaUsers size={20} /></span>
+                <span className="p-2 bg-primary/10 rounded-lg text-primary"><FaCode size={20} /></span>
                 {t.skillsTitle}
               </h3>
 
