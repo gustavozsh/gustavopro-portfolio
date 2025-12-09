@@ -1,4 +1,3 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePosts, Post } from '@/hooks/use-posts';
@@ -6,7 +5,6 @@ import { FaGithub, FaLinkedin, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMar
 import { Streamdown } from 'streamdown';
 
 export default function Home() {
-  const { user, loading, isAuthenticated, logout } = useAuth();
   const { posts: aboutPosts } = usePosts('about');
   const { posts: projectPosts } = usePosts('projects');
   const { posts: eventPosts } = usePosts('events');
