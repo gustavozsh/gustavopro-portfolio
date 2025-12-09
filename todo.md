@@ -19,3 +19,8 @@
 - [x] Implementar seção de Skills via Markdown
 - [x] Redesenhar seção de Eventos com cards clicáveis e galeria de fotos (substituído por link Google Fotos)
 - [x] Implementar cards de eventos com botão "Ver Álbum" para Google Fotos
+- [x] Reorganizar estrutura de pastas: /public/posts/{skills, events, events/images, projects, about}
+- [x] Implementar botão de troca de idioma (PT/EN) com tradução completa
+- [x] Adicionar botão de download do currículo PDF
+- [x] Atualizar links das redes sociais (GitHub, LinkedIn, Instagram, Blog, GDG, YouTube)
+- [x] Adicionar três novos projetos: Cloud Cost Agent, IA Diário Oficial, IA Instagram

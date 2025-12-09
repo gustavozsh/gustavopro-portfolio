@@ -14,6 +14,8 @@ export interface Post {
     date?: string;
     role?: string;
     location?: string;
+    thumbnail?: string;
+    albumUrl?: string;
     [key: string]: any;
   };
 }
@@ -25,36 +27,41 @@ export function usePosts(section?: string) {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        // In a real static site generation setup, we would list files at build time.
-        // For this client-side implementation, we'll fetch a known list or manifest.
-        // Since we can't list directory contents client-side without a server index,
-        // we will fetch the specific files we created.
-        
+        // File paths organized by folder structure
         const files = [
-          'about.md',
-          'skills.md',
-          'project-1.md',
-          'event-1.md',
-          'event-2.md',
-          'event-3.md'
+          { path: 'about/about.md', section: 'about' },
+          { path: 'skills/skills.md', section: 'skills' },
+          { path: 'projects/project-1.md', section: 'projects' },
+          { path: 'projects/project-2.md', section: 'projects' },
+          { path: 'projects/project-3.md', section: 'projects' },
+          { path: 'projects/project-4.md', section: 'projects' },
+          { path: 'events/event-1.md', section: 'events' },
+          { path: 'events/event-2.md', section: 'events' },
+          { path: 'events/event-3.md', section: 'events' }
         ];
 
         const loadedPosts = await Promise.all(
           files.map(async (file) => {
-            const response = await fetch(`/posts/${file}`);
-            const text = await response.text();
-            const { data, content } = parseFrontmatter(text);
-            return {
-              slug: file.replace('.md', ''),
-              content,
-              data
-            };
+            try {
+              const response = await fetch(`/posts/${file.path}`);
+              if (!response.ok) return null;
+              const text = await response.text();
+              const { data, content } = parseFrontmatter(text);
+              return {
+                slug: file.path.split('/').pop()?.replace('.md', '') || '',
+                content,
+                data
+              };
+            } catch {
+              return null;
+            }
           })
         );
 
-        let filteredPosts = loadedPosts;
+        let filteredPosts = loadedPosts.filter((post): post is Post => post !== null);
+        
         if (section) {
-          filteredPosts = loadedPosts.filter(post => post.data.section === section);
+          filteredPosts = filteredPosts.filter(post => post.data.section === section);
         }
 
         // Sort by order if available
