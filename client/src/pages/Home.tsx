@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePosts } from '@/hooks/use-posts';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaUsers, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaImages } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaUsers, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaImages, FaCode } from 'react-icons/fa';
 import { SiGooglechrome } from 'react-icons/si';
 import { Streamdown } from 'streamdown';
 import { motion } from 'framer-motion';
@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import { trpc } from '@/lib/trpc';
 
 // ============================================================================
 // CONTACT FORM - PLACEHOLDER IMPLEMENTATION
@@ -500,11 +501,11 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || contactMutation.isPending}
                     className="w-full btn-primary text-lg py-4 mt-4 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      {isSubmitting ? (
+                      {(isSubmitting || contactMutation.isPending) ? (
                         <span className="animate-pulse">{t.sending}</span>
                       ) : (
                         <>
