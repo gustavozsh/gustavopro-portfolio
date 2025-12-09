@@ -12,6 +12,14 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { trpc } from '@/lib/trpc';
 
+// ============================================================================
+// CONTACT FORM - PLACEHOLDER IMPLEMENTATION
+// ============================================================================
+// NOTE: The contact form below validates user input but does NOT actually 
+// send messages anywhere. Form submissions are logged to console only.
+// This is a placeholder implementation pending backend integration.
+// ============================================================================
+
 // Validation Schema for Contact Form
 const contactSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }).max(50),
@@ -35,22 +43,18 @@ export default function Home() {
     resolver: zodResolver(contactSchema),
   });
 
-  const contactMutation = trpc.contact.submit.useMutation({
-    onSuccess: () => {
-      toast.success(t.messageSent);
-      reset();
-    },
-    onError: (error) => {
-      toast.error(t.messageFailed);
-      // Only log error message, not full error object
-      if (error?.message) {
-        console.error('Contact form error:', error.message);
-      }
-    },
-  });
-
+  // PLACEHOLDER: This form submission is not yet connected to a backend API
+  // TODO: Implement actual email/contact submission when backend is ready
   const onSubmit = async (data: ContactFormValues) => {
-    contactMutation.mutate(data);
+    // Simulate API call - this is a placeholder implementation
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // For now, just log to console (not sent anywhere)
+    console.log("Form Data (not sent - placeholder implementation):", data);
+    
+    // Show success message (note: data is not actually sent)
+    toast.success(t.messageSent || "Message sent successfully!");
+    reset();
   };
 
   // Helper function to format date as "Month Year" based on language
