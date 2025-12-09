@@ -46,6 +46,8 @@ interface Translations {
   messageLabel: string;
   messagePlaceholder: string;
   sendButton: string;
+  sending: string;
+  messageSent: string;
   
   // Footer
   footerRights: string;
@@ -99,6 +101,8 @@ const translations: Record<Language, Translations> = {
     messageLabel: 'Mensagem',
     messagePlaceholder: 'Conte sobre seu projeto...',
     sendButton: 'Enviar Mensagem',
+    sending: 'Enviando...',
+    messageSent: 'Mensagem enviada com sucesso!',
     
     // Footer
     footerRights: 'Todos os direitos reservados.',
@@ -150,6 +154,8 @@ const translations: Record<Language, Translations> = {
     messageLabel: 'Message',
     messagePlaceholder: 'Tell me about your project...',
     sendButton: 'Send Message',
+    sending: 'Sending...',
+    messageSent: 'Message sent successfully!',
     
     // Footer
     footerRights: 'All rights reserved.',

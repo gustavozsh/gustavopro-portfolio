@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import { trpc } from '@/lib/trpc';
 
 // Validation Schema for Contact Form
 const contactSchema = z.object({
@@ -34,12 +35,19 @@ export default function Home() {
     resolver: zodResolver(contactSchema),
   });
 
+  const contactMutation = trpc.contact.submit.useMutation({
+    onSuccess: () => {
+      toast.success(t.messageSent);
+      reset();
+    },
+    onError: (error) => {
+      toast.error('Failed to send message. Please try again.');
+      console.error('Contact form error:', error);
+    },
+  });
+
   const onSubmit = async (data: ContactFormValues) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Form Data:", data);
-    toast.success(t.messageSent || "Message sent successfully!");
-    reset();
+    contactMutation.mutate(data);
   };
 
   // Helper function to format date as "Month Year" based on language
@@ -486,11 +494,11 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || contactMutation.isPending}
                     className="w-full btn-primary text-lg py-4 mt-4 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      {isSubmitting ? (
+                      {(isSubmitting || contactMutation.isPending) ? (
                         <span className="animate-pulse">{t.sending}</span>
                       ) : (
                         <>
