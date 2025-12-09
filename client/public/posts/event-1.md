@@ -1,9 +1,11 @@
 ---
 title: "React Conf Brazil 2024"
 section: "events"
-date: "2024-10-15"
+date: "2024-10"
 role: "Palestrante"
 location: "São Paulo, SP"
+thumbnail: "/images/events/event-1-thumb.jpg"
+albumUrl: "https://photos.google.com/share/seu-album-aqui"
 order: 1
 ---
 

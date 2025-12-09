@@ -17,4 +17,5 @@
 - [x] File storage integration (cancelado - projeto será hospedado no GitHub)
 - [x] Conversão full-stack revertida (projeto permanece estático)
 - [x] Implementar seção de Skills via Markdown
-- [ ] Redesenhar seção de Eventos com cards clicáveis e galeria de fotos (mín. 3 fotos por evento, exibir apenas mês/ano)
+- [x] Redesenhar seção de Eventos com cards clicáveis e galeria de fotos (substituído por link Google Fotos)
+- [x] Implementar cards de eventos com botão "Ver Álbum" para Google Fotos

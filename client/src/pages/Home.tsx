@@ -1,8 +1,20 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { usePosts, Post } from '@/hooks/use-posts';
-import { FaGithub, FaLinkedin, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { usePosts } from '@/hooks/use-posts';
+import { FaGithub, FaLinkedin, FaWhatsapp, FaArrowRight, FaCalendarAlt, FaMapMarkerAlt, FaImages } from 'react-icons/fa';
 import { Streamdown } from 'streamdown';
+
+// Helper function to format date as "Mês Ano"
+function formatEventDate(dateStr: string | undefined): string {
+  if (!dateStr) return '';
+  const [year, month] = dateStr.split('-');
+  const monthNames = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ];
+  const monthIndex = parseInt(month, 10) - 1;
+  return `${monthNames[monthIndex]} ${year}`;
+}
 
 export default function Home() {
   const { posts: aboutPosts } = usePosts('about');
@@ -153,35 +165,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Events Section */}
+      {/* Events Section - Cards with Google Photos Link */}
       <section id="events" className="py-24 bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url(/images/bg-texture.png)' }}></div>
         <div className="container relative z-10">
           <h2 className="section-title text-white after:bg-accent">EVENTOS</h2>
           
-          <div className="space-y-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {eventPosts.length > 0 ? (
               eventPosts.map((event, index) => (
-                <div key={index} className="flex flex-col md:flex-row gap-6 border-l-4 border-accent pl-6 md:pl-0 md:border-l-0 md:border-b-2 md:border-white/20 md:pb-8 group hover:border-accent transition-colors">
-                  <div className="md:w-1/4 flex flex-col md:items-end md:pr-8 md:border-r-2 md:border-white/20 md:group-hover:border-accent transition-colors">
-                    <span className="text-4xl font-display font-bold text-accent">{event.data.date?.split('-')[2]}</span>
-                    <span className="text-xl font-bold uppercase">{new Date(event.data.date || '').toLocaleString('default', { month: 'short' })}</span>
-                    <span className="text-muted-foreground">{event.data.date?.split('-')[0]}</span>
+                <div 
+                  key={index} 
+                  className="group bg-gray-900 border-2 border-white/20 hover:border-accent transition-all duration-300 overflow-hidden"
+                >
+                  {/* Thumbnail */}
+                  <div className="aspect-video relative overflow-hidden">
+                    <img 
+                      src={event.data.thumbnail || "/images/project-placeholder.png"} 
+                      alt={event.data.title} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    />
+                    
+                    {/* Date Badge */}
+                    <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 font-display font-bold text-sm">
+                      {formatEventDate(event.data.date)}
+                    </div>
                   </div>
-                  <div className="md:w-3/4">
-                    <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-accent transition-colors">{event.data.title}</h3>
-                    <div className="flex flex-wrap gap-4 text-sm font-mono text-gray-400 mb-4">
-                      <span className="flex items-center"><FaCalendarAlt className="mr-2" /> {event.data.role}</span>
-                      <span className="flex items-center"><FaMapMarkerAlt className="mr-2" /> {event.data.location}</span>
+                  
+                  {/* Card Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                      {event.data.title}
+                    </h3>
+                    
+                    <div className="flex flex-wrap gap-3 text-sm text-gray-400 mb-4">
+                      <span className="flex items-center gap-1">
+                        <FaCalendarAlt className="text-accent" /> 
+                        {event.data.role}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <FaMapMarkerAlt className="text-accent" /> 
+                        {event.data.location}
+                      </span>
                     </div>
-                    <div className="prose prose-invert max-w-none">
-                      <Streamdown>{event.content}</Streamdown>
-                    </div>
+                    
+                    <p className="text-gray-300 text-sm mb-6 line-clamp-2">
+                      {event.content.replace(/[#*_]/g, '').substring(0, 120)}...
+                    </p>
+                    
+                    {/* Ver Álbum Button */}
+                    <a 
+                      href={event.data.albumUrl || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-accent text-black px-4 py-2 font-bold text-sm hover:bg-white transition-colors"
+                      onClick={(e) => {
+                        if (!event.data.albumUrl || event.data.albumUrl === "https://photos.google.com/share/seu-album-aqui") {
+                          e.preventDefault();
+                          alert("Link do álbum ainda não configurado. Edite o arquivo event-X.md para adicionar o link do Google Fotos.");
+                        }
+                      }}
+                    >
+                      <FaImages /> Ver Álbum de Fotos
+                    </a>
                   </div>
                 </div>
               ))
             ) : (
-              <p>Nenhum evento encontrado.</p>
+              <p className="col-span-full text-center text-gray-400">Nenhum evento encontrado.</p>
             )}
           </div>
         </div>
