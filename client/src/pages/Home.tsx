@@ -490,7 +490,7 @@ export default function Home() {
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       {isSubmitting ? (
-                        <span className="animate-pulse">Sending...</span>
+                        <span className="animate-pulse">{t.sending}</span>
                       ) : (
                         <>
                           {t.sendButton} <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
